@@ -136,6 +136,10 @@ function App() {
   const [stage, setStage] = useState(0)
   const [stage2, setStage2] = useState(0)
 
+  const tab1 = stage < 0.5
+  const tab2 = stage >= 0.5 && stage2 < 0.5
+  const tab3 = stage2 >= 0.5
+
   useEffect(() => {
     const onScroll = () => {
       const el = sectionRef.current
@@ -155,37 +159,40 @@ function App() {
 
   return (
     <div ref={sectionRef} className="relative" style={{ height: '500vh' }}>
-      <div className="sticky top-0 h-screen w-full bg-white px-16 py-12 flex flex-col box-border overflow-hidden">
-        <h1 className="font-anton text-6xl tracking-wide text-black">
+      <div className="sticky top-0 h-screen w-full bg-white px-16 py-6 flex flex-col box-border overflow-hidden">
+        <h1 className="font-anton text-4xl tracking-wide text-black">
           WHAT&rsquo;S INSIDE THE PUK
         </h1>
 
-        <div className="flex-1 grid grid-cols-2 items-center">
-          <div className="flex flex-col gap-10 pl-8">
-            <div className="flex items-start gap-6 min-h-[8rem]">
-              <div className="relative w-20 h-20 shrink-0">
+        <div className="flex-1 grid grid-cols-2 items-center gap-4">
+          <div className="relative flex flex-col gap-6 pl-4">
+            <div
+              className="relative"
+              style={{ height: tab1 ? '220px' : '90px' }}
+            >
+              <div className="relative w-[90px] h-[90px] shrink-0">
                 <img
                   src={iconCaffeine}
                   alt=""
                   className="absolute inset-0 w-full h-full object-contain"
-                  style={{ opacity: 1 - stage }}
+                  style={{ opacity: tab1 ? 1 : 0 }}
                 />
                 <img
                   src={iconA}
                   alt=""
                   className="absolute inset-0 w-full h-full object-contain"
-                  style={{ opacity: stage }}
+                  style={{ opacity: tab1 ? 0 : 1 }}
                 />
               </div>
               <div
-                className="font-lato max-w-md text-sm leading-relaxed text-neutral-800"
-                style={{ opacity: 1 - stage }}
+                className="absolute left-[110px] top-0 font-lato max-w-md text-xs leading-relaxed text-neutral-800 pointer-events-none"
+                style={{ opacity: tab1 ? 1 : 0 }}
               >
-                <h2 className="font-bold text-base mb-2 text-black">
+                <h2 className="font-bold text-[13px] mb-1 text-black">
                   ENDURA SURGE
                 </h2>
-                <p className="mb-3">The OG of energy - but smarter.</p>
-                <p className="mb-3">
+                <p className="mb-2">The OG of energy - but smarter.</p>
+                <p className="mb-2">
                   <span className="font-bold">The Science of It:</span>{' '}
                   Caffeine sharpens your alertness, boosts your mood, and gives
                   you that &ldquo;let&rsquo;s go&rdquo; energy without needing a
@@ -199,70 +206,73 @@ function App() {
               </div>
             </div>
 
-            <div className="flex items-start gap-6 min-h-[8rem]">
-              <div className="relative w-20 h-20 shrink-0">
+            <div
+              className="relative"
+              style={{ height: tab2 ? '220px' : '90px' }}
+            >
+              <div className="relative w-[90px] h-[90px] shrink-0">
                 <img
                   src={iconBrain}
                   alt=""
                   className="absolute inset-0 w-full h-full object-contain"
-                  style={{ opacity: 1 - stage }}
+                  style={{ opacity: tab1 ? 1 : 0 }}
                 />
                 <img
                   src={iconB}
                   alt=""
                   className="absolute inset-0 w-full h-full object-contain"
-                  style={{ opacity: stage }}
+                  style={{ opacity: tab1 ? 0 : 1 }}
                 />
               </div>
               <div
-                className="font-lato max-w-md text-sm leading-relaxed text-neutral-800"
-                style={{ opacity: stage * (1 - stage2) }}
+                className="absolute left-[110px] top-0 font-lato max-w-md text-xs leading-relaxed text-neutral-800 pointer-events-none"
+                style={{ opacity: tab2 ? 1 : 0 }}
               >
-                <h2 className="font-bold text-base mb-2 text-black">
+                <h2 className="font-bold text-[13px] mb-1 text-black">
                   ENDURA IQ
                 </h2>
-                <p className="mb-3">The OG of energy - but smarter.</p>
-                <p className="mb-3">
+                <p className="mb-2">The OG of energy - but smarter.</p>
+                <p className="mb-2">
                   <span className="font-bold">The Science of It:</span>{' '}
-                  Caffeine sharpens your alertness, boosts your mood, and gives
-                  you that &ldquo;let&rsquo;s go&rdquo; energy without needing a
-                  giant sugary drink. Alpha GPC is a natural compound that
-                  helps your brain make more acetylcholine (a fancy word for a
-                  neurotransmitter that helps you think fast and learn
-                  better). Think of it as premium fuel for your mental engine.
+                  Alpha GPC is a natural compound that helps your brain make
+                  more acetylcholine (a neurotransmitter that helps you think
+                  fast and learn better). Premium fuel for your mental engine.
                 </p>
                 <p>
                   <span className="font-bold">What&rsquo;s in It for You:</span>{' '}
-                  It kicks in fast and gets you focused &amp; boosts cognitive
-                  performance and helps you stay mentally dialed in.
+                  Boosts cognitive performance and helps you stay mentally
+                  dialed in.
                 </p>
               </div>
             </div>
 
-            <div className="flex items-start gap-6 min-h-[8rem]">
-              <div className="relative w-20 h-20 shrink-0">
+            <div
+              className="relative"
+              style={{ height: tab3 ? '220px' : '90px' }}
+            >
+              <div className="relative w-[90px] h-[90px] shrink-0">
                 <img
                   src={iconMushroom}
                   alt=""
                   className="absolute inset-0 w-full h-full object-contain"
-                  style={{ opacity: 1 - stage2 }}
+                  style={{ opacity: tab3 ? 0 : 1 }}
                 />
                 <img
                   src={iconC}
                   alt=""
                   className="absolute inset-0 w-full h-full object-contain"
-                  style={{ opacity: stage2 }}
+                  style={{ opacity: tab3 ? 1 : 0 }}
                 />
               </div>
               <div
-                className="font-lato max-w-md text-sm leading-relaxed text-neutral-800"
-                style={{ opacity: stage2 }}
+                className="absolute left-[110px] top-0 font-lato max-w-md text-xs leading-relaxed text-neutral-800 pointer-events-none"
+                style={{ opacity: tab3 ? 1 : 0 }}
               >
-                <h2 className="font-bold text-base mb-2 text-black">
+                <h2 className="font-bold text-[13px] mb-1 text-black">
                   ENDURA FLOW
                 </h2>
-                <p className="mb-3">The OG of energy - but smarter.</p>
-                <p className="mb-3">
+                <p className="mb-2">The OG of energy - but smarter.</p>
+                <p className="mb-2">
                   <span className="font-bold">The Science of It:</span>{' '}
                   Caffeine sharpens your alertness, boosts your mood, and gives
                   you that &ldquo;let&rsquo;s go&rdquo; energy without needing a
@@ -277,13 +287,13 @@ function App() {
             </div>
           </div>
 
-          <div className="relative h-[70vh] w-full">
+          <div className="relative h-[60vh] w-full">
             <CanScene progressRef={progressRef} />
             <div
               className="absolute inset-0 pointer-events-none font-lato text-sm text-neutral-800"
               style={{ opacity: textPhase }}
             >
-              <div style={{ opacity: 1 - stage }}>
+              <div style={{ opacity: tab1 ? 1 : 0 }}>
                 <span
                   className="absolute left-9 top-72 whitespace-nowrap"
                   style={{
@@ -305,7 +315,7 @@ function App() {
                   No Crash
                 </span>
               </div>
-              <div style={{ opacity: stage * (1 - stage2) }}>
+              <div style={{ opacity: tab2 ? 1 : 0 }}>
                 <span
                   className="absolute left-9 top-72 whitespace-nowrap"
                   style={{
@@ -327,7 +337,7 @@ function App() {
                   50mg L-Theanine
                 </span>
               </div>
-              <div style={{ opacity: stage2 }}>
+              <div style={{ opacity: tab3 ? 1 : 0 }}>
                 <span
                   className="absolute left-9 top-64 whitespace-nowrap"
                   style={{ transform: `translateY(-50%) translateX(${(1 - textPhase) * -20}px)` }}
